@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from json import load, dump
 from discord.ext import commands
+from cogs.utils.config import *
 
 if not os.path.exists('settings/'):
     os.makedirs('settings/')
@@ -32,6 +33,8 @@ def setup():
         if not config["prefix"]:
             print("Empty command prefixes are invalid.")
 
+    config["setup_run"] = True
+
     input("\nThis concludes the setup wizard. The bot can be started by pressing enter.")
 
     print("Starting bot...")
@@ -42,8 +45,14 @@ def setup():
     with open('settings/config.json', encoding='utf8', mode='w') as f:
         dump(config, f, sort_keys=True, indent=4)
 
-setup()
+    params = [sys.executable, 'main.py']
+    params.extend(sys.argv[1:])
+    subprocess.call(params) 
 
-params = [sys.executable, 'main.py']
-params.extend(sys.argv[1:])
-subprocess.call(params)
+if not os.path.exists('settings/config.json'):
+    setup()
+
+if get_config_value('config', 'setup_run'):
+    print("The setup has already run.")
+else:
+    setup()

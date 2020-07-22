@@ -6,7 +6,7 @@ Discord bot for @MonikaTeau's Discord server
 
 1. `git clone https://github.com/lexisother/MonBot`
 2. `pip3 install requirements.txt`
-3. `python main.py`
+3. `python setup.py`
 
 ## License
 
