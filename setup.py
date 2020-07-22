@@ -14,11 +14,23 @@ def setup():
     config = {}
     print("Welcome to the MonBot setup wizard!\nThis wizard will guide you through the initial configuration required to get the bot working.\nThe choices you make in this wizard can be changed at any time by editing the settings/config.json file.\n")
 
-    print("The first step is to enter your bot token.")
-    print("Go to https://discord.com/developers and copy the bot token from the desired application.")
-    print("Paste the token below.")
-    print("-------------------------------------------------------------")
-    config["token"] = input("| ").strip().strip('"')
+    config["token"] = False
+    while not config["token"]:
+        print("The first step is to enter your bot token.")
+        print("Go to https://discord.com/developers and copy the bot token from the desired application.")
+        print("Paste the token below.")
+        print("-------------------------------------------------------------")
+        config["token"] = input("| ").strip().strip('"')
+        if not config["token"]:
+            print("Please enter your token.")
+
+    config["prefix"] = False
+    while not config["prefix"]:
+        print("\nEnter the command prefix you want to use for main commands (e.g. if you enter > you will use commands like so: >about).")
+        print("-------------------------------------------------------------")
+        config["prefix"] = input("| ").strip()
+        if not config["prefix"]:
+            print("Empty command prefixes are invalid.")
 
     input("\nThis concludes the setup wizard. The bot can be started by pressing enter.")
 

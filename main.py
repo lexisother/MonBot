@@ -32,7 +32,7 @@ def set_log():
 
 logger = set_log()
 
-bot = commands.Bot(command_prefix="%",
+bot = commands.Bot(command_prefix=get_config_value('config', 'prefix'),
                    description='''MonBot sends hugs on command!\nMade by Lexi#2248''')
 
 
